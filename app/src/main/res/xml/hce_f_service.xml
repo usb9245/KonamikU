@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <host-nfcf-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/app_name">
-    <system-code-filter android:name="88B4" />
+    <system-code-filter android:name="4000" />
     <nfcid2-filter      android:name="02FE000000000000" />
-    <t3tPmm-filter      android:name="00F1000000014300" />
+    <!-- Mobile FeliCa 4.1 marker: IC code 0x18; timing bytes retained from the tested profile. -->
+    <t3tPmm-filter      android:name="0118000000014300" />
 </host-nfcf-service>

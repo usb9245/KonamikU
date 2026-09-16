@@ -23,8 +23,8 @@ object HiddenApiNfcChecker {
     private const val NFC_CARD_EMULATION =
         "android.nfc.cardemulation.NfcFCardEmulation"
 
-    /** System code used by FeliCa HCE-F (88B4). */
-    private const val SYSTEM_CODE = "88B4"
+    /** Stock-compatible diagnostic System Code used by this build (4000). */
+    private const val SYSTEM_CODE = "4000"
 
     /** Example NFCID2 that should be accepted (02FE prefix). */
     private const val EXAMPLE_NFCID2 = "02FE000000000001"

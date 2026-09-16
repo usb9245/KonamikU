@@ -65,7 +65,7 @@ class FelicaCard(
 fun String.toCompatIdm(): String = "02FE" + this.uppercase().substring(4)
 
 /** FeliCa system code registered for HCE-F routing. */
-const val SYSTEM_CODE_FELICA = "88B4"
+const val SYSTEM_CODE_FELICA = "4000"
 
 /** Resolves the active IDm bytes to register based on emulation mode. */
 fun resolveActiveIdm(idm: String, mode: EmuMode): String {

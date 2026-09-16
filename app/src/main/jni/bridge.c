@@ -9,10 +9,10 @@
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,  TAG, __VA_ARGS__)
 
 /* ── Target PMm ──────────────────────────────────────────────────────────
- * 00 F1 00 00 00 01 43 00  (KONAMI reader compatible)
+ * 01 18 00 00 00 01 43 00  (Mobile FeliCa 4.1 / IC code 0x18)
  */
 static const uint8_t TARGET_PMM[8] = {
-    0x00, 0xF1, 0x00, 0x00, 0x00, 0x01, 0x43, 0x00
+    0x01, 0x18, 0x00, 0x00, 0x00, 0x01, 0x43, 0x00
 };
 
 /* Original function pointer — same signature as AICEmu */
