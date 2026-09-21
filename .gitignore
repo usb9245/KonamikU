@@ -9,4 +9,10 @@ local.properties
 app/release
 version.properties
 
+# Android build outputs
+*.apk
+*.aab
+*.apks
+*.idsig
+
 version.properties

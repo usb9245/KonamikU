@@ -21,6 +21,7 @@ import org.cf0x.konamiku.data.AppDataStore
 import org.cf0x.konamiku.data.AppLocale
 import org.cf0x.konamiku.data.ColorSource
 import org.cf0x.konamiku.data.ThemeMode
+import org.cf0x.konamiku.nfc.NfcDiscoveryController
 import org.cf0x.konamiku.notification.LiveUpdateManager
 import org.cf0x.konamiku.ui.layout.MainLayout
 import org.cf0x.konamiku.ui.theme.KonamikuTheme
@@ -84,6 +85,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (runBlocking { dataStore.activeCardId.first() } != null) {
+            NfcDiscoveryController.enableFelicaOnly(this, nfcAdapter)
+        }
         if (Build.VERSION.SDK_INT >= 33) {
             runCatching {
                 val lm = getSystemService(android.app.LocaleManager::class.java) ?: return@runCatching
@@ -98,6 +102,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
+        // The discovery override is scoped to this foreground Activity. Restore
+        // the device defaults before another app comes to the foreground.
+        NfcDiscoveryController.reset(this, nfcAdapter)
         // 每次 onPause 实时读取开关值，确保用户刚改的设置即时生效
         if (!runBlocking { dataStore.backgroundEmulation.first() }) {
             stopEmulation()

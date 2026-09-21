@@ -81,6 +81,7 @@ import org.cf0x.konamiku.data.EmuMode
 import org.cf0x.konamiku.data.JsonManager
 import org.cf0x.konamiku.data.NfcCard
 import org.cf0x.konamiku.nfc.EmuCard
+import org.cf0x.konamiku.nfc.NfcDiscoveryController
 import org.cf0x.konamiku.nfc.SYSTEM_CODE_FELICA
 import org.cf0x.konamiku.nfc.resolveActiveIdm
 import org.cf0x.konamiku.notification.LiveUpdateManager
@@ -205,6 +206,7 @@ fun MainScreen(dataStore: AppDataStore, statusViewModel: StatusViewModel) {
                 }
 
                 emulation.enableService(activity, serviceComponent)
+                NfcDiscoveryController.enableFelicaOnly(activity, nfcAdapter)
             }.onFailure { e ->
                 android.util.Log.e("KonamikU", "NFC registration failed: ${e.message}")
                 if (e is android.os.DeadObjectException || e.message?.contains("Failed to reach") == true) {
@@ -224,6 +226,7 @@ fun MainScreen(dataStore: AppDataStore, statusViewModel: StatusViewModel) {
             runCatching {
                 val activity = context as? Activity ?: return@launch
                 freshEmulation()?.disableService(activity)
+                NfcDiscoveryController.reset(activity, nfcAdapter)
             }
             dataStore.saveActiveCardId(null)
             LiveUpdateManager.cancel(context)
